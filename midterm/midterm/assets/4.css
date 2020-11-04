@@ -1,0 +1,56 @@
+.flex1 {
+  display: block;
+  height: 200px;
+  text-align: center;
+}
+
+.flex2 {
+  display: block;
+  text-align: center;
+  height: 450px;
+  padding: 30px;
+}
+
+.flex3 {
+  display: block;
+  height: 100px;
+}
+
+.flex4 {
+  display: block;
+  height: 500px;
+  padding: 100px;
+  text-align: center;
+}
+
+.flex5 {
+  display: block;
+  height: 300px;
+  text-align: center;
+  padding: 30px;
+}
+
+.flex9 {
+  display: block;
+  height: 100px;
+  text-align: center;
+  padding: 30px;
+}
+
+.flex6 {
+  display: block;
+  height: 300px;
+  padding: 30px;
+}
+
+.flex7 {
+  display: block;
+  padding-top: 500px;
+  text-align: center;
+}
+
+.flex8 {
+  display: block;
+  text-align: center;
+  padding: 30px;
+}
