@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="economic.css">
+    <title>Economic</title>
+    <style>
+        .bottom{top:-600px;}
+        .bottomm{top:-1000px;}
+    </style>
+</head>
+<body>
+    	  
+  <div class="text" style=" text-align: center ;letter-spacing:8px;">
+    <input type="checkbox" id="1" >
+    <label for="1" style="font-size:20px;">經濟成長率</label>
+    <input type="checkbox" id="2">
+    <label for="2" style="font-size:20px;">失業率</label>
+    <input type="checkbox" id="3">
+    <label for="3"style="font-size:20px;">物價上漲率</label>
+    <br>
+    <button onclick="ok()">確定</button>
+    </div><br>
+
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.6/Chart.bundle.min.js"></script>
+        <div id="div1">
+          <canvas id="myChart1" width="1300" height="400"></canvas>
+          <br>
+          <center>
+          <div id="text1" style="color:#AA0000;font-weight: 750; font-size: 21px;"></div>
+          <p id="p_1" style="color: #007799; font-weight: 450;"></p>
+          <a id="a_1"></a>
+          </center></div>
+          <br>
+          <br>
+        <div id="div2">
+          <canvas id="myChart2" style="z-index:-1;"width="1300" height="400" class ="bottom"></canvas>
+          <br>
+          <center>
+          <div id="text2" style="color:#AA0000;font-weight: 750; font-size: 21px;"></div>
+          <p id="p_2" style="color: #007799; font-weight: 450;"></p>
+          <a id="a_2"></a>
+          </center></div>
+          <br>
+        <div id="div3">
+          <canvas id="myChart3" width="1300" height="400" class ="bottomm"></canvas>
+          <br>
+          <center>
+          <div id="text3" style="color:#AA0000;font-weight: 750; font-size: 21px;"></div>
+          <p id="p_3" style="color: #007799; font-weight: 450;"></p>
+          <a id="a_3"></a>
+          </center></div>
+
+        <script>
+            var check = new Array(3);
+            for(let i =0;i<3;i++)
+              check[i] =0;
+            function ok()
+            {
+                for(let i =0;i<3;i++)
+                {
+                    if(document.getElementById((i+1)).checked== true && check[i] !=-1)
+                    {
+                        check[i] =1;
+                    }
+                }
+            
+            var data1 = [
+            {"Time": "1999Q1", "Volume":6.26},
+            {"Time": "1999Q2", "Volume": 7.24},
+            {"Time": "1999Q3", "Volume": 5.85},
+            {"Time": "1999Q4", "Volume": 7.53},
+            {"Time": "2000Q1", "Volume": 6.02},
+            {"Time": "2000Q2", "Volume": 6.27},
+            {"Time": "2000Q3", "Volume": 7.19},
+            {"Time": "2000Q4", "Volume": 5.78},
+            {"Time": "2001Q1", "Volume": 1.45},
+            {"Time": "2001Q2", "Volume": -2.55},
+            {"Time": "2001Q3", "Volume": -4.06},
+            {"Time": "2002Q1", "Volume": 1.82},
+            {"Time": "2002Q2", "Volume": 6.75},
+            {"Time": "2002Q3", "Volume": 7.02},
+            {"Time": "2002Q4", "Volume": 6.22},
+            {"Time": "2003Q1", "Volume": 5.17},
+            {"Time": "2003Q2", "Volume": -1.15},
+            {"Time": "2003Q3", "Volume": 5.41},
+            {"Time": "2003Q4", "Volume": 7.26},
+            {"Time": "2004Q1", "Volume": 6.93},
+            {"Time": "2004Q2", "Volume": 10.80},
+            {"Time": "2004Q3", "Volume": 7.05},
+            {"Time": "2004Q4", "Volume": 3.60},
+            {"Time": "2005Q1", "Volume": 3.76},
+            {"Time": "2005Q2", "Volume": 4.82},
+            {"Time": "2005Q3", "Volume": 5.06},
+            {"Time": "2005Q4", "Volume": 7.63},
+            {"Time": "2006Q1", "Volume": 6.05},
+            {"Time": "2006Q2", "Volume": 5.64},
+            {"Time": "2006Q3", "Volume": 7.19},
+            {"Time": "2006Q4", "Volume": 4.33},
+            {"Time": "2007Q1", "Volume": 5.64},
+            {"Time": "2007Q2", "Volume": 7.12},
+            {"Time": "2007Q3", "Volume": 7.97},
+            {"Time": "2007Q4", "Volume": 6.58},
+            {"Time": "2007Q1", "Volume": 7.66},
+            {"Time": "2008Q1", "Volume": 5.65},
+            {"Time": "2008Q2", "Volume": -1.39},
+            {"Time": "2008Q3", "Volume": -7.36},
+            {"Time": "2008Q4", "Volume": -7.88},
+            {"Time": "2009Q1", "Volume": -5.92},  
+            {"Time": "2009Q2", "Volume": -1.13},
+            {"Time": "2009Q3", "Volume": 8.58},
+            {"Time": "2009Q4", "Volume": 11.55},
+            {"Time": "2010Q1", "Volume": 12.02},
+            {"Time": "2010Q2", "Volume": 11.54},
+            {"Time": "2010Q3", "Volume": 6.34},
+            {"Time": "2010Q4", "Volume": 6.72},
+            {"Time": "2011Q1", "Volume": 4.16},
+            {"Time": "2011Q2", "Volume": 3.28},
+            {"Time": "2011Q3", "Volume": 0.89},
+            {"Time": "2011Q4", "Volume": 1.09},
+            {"Time": "2012Q1", "Volume": 1.04},
+            {"Time": "2012Q2", "Volume": 2.18},
+            {"Time": "2012Q3", "Volume": 4.48},
+            {"Time": "2012Q4", "Volume": 1.50},
+            {"Time": "2013Q1", "Volume": 1.50},
+            {"Time": "2013Q2", "Volume": 2.68},
+            {"Time": "2013Q3", "Volume": 1.95},
+            {"Time": "2013Q4", "Volume": 3.73},
+            {"Time": "2014Q1", "Volume": 4.69},
+            {"Time": "2014Q2", "Volume": 4.92},
+            {"Time": "2014Q3", "Volume": 4.90},
+            {"Time": "2014Q4", "Volume": 4.38},
+            {"Time": "2015Q1", "Volume": 4.80},
+            {"Time": "2015Q1", "Volume": 1.89},
+            {"Time": "2015Q2", "Volume": -0.28},
+            {"Time": "2015Q3", "Volume": -0.20},
+            {"Time": "2015Q4", "Volume": -0.09},
+            {"Time": "2016Q1", "Volume": 1.69},
+            {"Time": "2016Q2", "Volume": 3.00},
+            {"Time": "2016Q3", "Volume": 3.92},
+            {"Time": "2016Q4", "Volume": 3.24},
+            {"Time": "2017Q1", "Volume": 2.64},
+            {"Time": "2017Q2", "Volume": 3.61},
+            {"Time": "2017Q3", "Volume": 3.71},
+            {"Time": "2018Q4", "Volume": 3.41},
+            {"Time": "2019Q1", "Volume": 3.442},
+            {"Time": "2019Q1", "Volume": 2.29},
+            {"Time": "2019Q2", "Volume": 2.12},
+            {"Time": "2019Q3", "Volume": 1.88},
+            {"Time": "2019Q4", "Volume": 2.87} ];
+            var data2 = [
+            {"Time": "1999", "Volume":2.92},
+            {"Time": "2000", "Volume": 2.99},
+            {"Time": "2001", "Volume": 4.57},
+            {"Time": "2002", "Volume": 5.17},
+            {"Time": "2003", "Volume": 4.99},
+            {"Time": "2004", "Volume": 4.44},
+            {"Time": "2005", "Volume": 4.13},
+            {"Time": "2006", "Volume": 3.91},
+            {"Time": "2007", "Volume": 3.91},
+            {"Time": "2008", "Volume": 4.14},
+            {"Time": "2009", "Volume": 5.85},
+            {"Time": "2010", "Volume": 5.21},
+            {"Time": "2011", "Volume": 4.39},
+            {"Time": "2012", "Volume": 4.24},
+            {"Time": "2013", "Volume": 4.28},
+            {"Time": "2014", "Volume": 3.96},
+            {"Time": "2015", "Volume": 3.78},
+            {"Time": "2016", "Volume": 3.92},
+            {"Time": "2017", "Volume": 3.76},
+            {"Time": "2018", "Volume":3.71},
+            {"Time": "2019", "Volume": 3.73}];
+            var data3 = [
+            {"Time": "1999", "Volume":0.18},
+            {"Time": "2000", "Volume": 1.26},
+            {"Time": "2001", "Volume": -0.01},
+            {"Time": "2002", "Volume": -0.20},
+            {"Time": "2003", "Volume": -0.28},
+            {"Time": "2004", "Volume": 1.61},
+            {"Time": "2005", "Volume": 2.31},
+            {"Time": "2006", "Volume": 0.6},
+            {"Time": "2007", "Volume": 1.8},
+            {"Time": "2008", "Volume": 3.52},
+            {"Time": "2009", "Volume": -0.87},
+            {"Time": "2010", "Volume": 0.97},
+            {"Time": "2011", "Volume": 1.42},
+            {"Time": "2012", "Volume": 1.93},
+            {"Time": "2013", "Volume": 0.79},
+            {"Time": "2014", "Volume": 1.2},
+            {"Time": "2015", "Volume": -0.3},
+            {"Time": "2016", "Volume": 1.39},
+            {"Time": "2017", "Volume": 0.62},
+            {"Time": "2018", "Volume":1.35},
+            {"Time": "2019", "Volume": 0.56}];
+          if(check[0]==1){
+          var ctx = document.getElementById('myChart1').getContext("2d");
+          document.getElementById("div1").style="border:3px dashed #336666	";
+          var chart = new Chart(ctx, 
+          {
+            type: "line",
+            data: {
+            labels: data1.map(x=>x.Time),
+            datasets: [{
+            label: "經濟成長率",
+            data: data1.map(x=>x.Volume),
+            lineTension: 0,
+            backgroundColor: "black",
+            borderColor: "black",
+            fill: false,
+            borderWidth: 2,
+            ointRadius: 5,
+            pointHoverRadius: 7,
+            }]
+          },
+            options:{
+            title:{
+            display: true,
+            text: "經濟成長率",
+            position: "top",
+            fontSize: 50,
+            fontStyle: "normal",
+            fontColor:"	#FFDC35	",
+            fontFamily: "Century Gothic"
+          },
+          legend:{
+            display: true
+          },
+          responsive: false
+        }
+      });  
+        check[0] =-1;
+        document.getElementById("text1").innerHTML="經濟成長是透過勞動力投入、資本累積與技術創新等方式提高生產能力，以滿足更多最終需求，促進經濟規模擴增的現象。";
+	  document.getElementById("p_1").innerHTML="資料出處：";
+	  document.getElementById("a_1").href="https://www.dgbas.gov.tw/point.asp?index=1";
+	  document.getElementById("a_1").innerHTML=" https://www.dgbas.gov.tw/point.asp?index=1";
+      }
+    
+      if(check[1]==1){
+       var ctx1 = document.getElementById('myChart2').getContext("2d");
+      document.getElementById("div2").style="border:3px dashed #336666";
+      var chart = new Chart(ctx1, 
+      {
+        type: "line",
+        data: {
+          labels: data2.map(x=>x.Time),
+          datasets: [{
+          label: "失業率",
+          data: data2.map(x=>x.Volume),
+          lineTension: 0,
+          backgroundColor: "black",
+          borderColor: "black",
+          fill: false,
+          borderWidth: 2, 
+          pointRadius: 5,
+          pointHoverRadius: 7,
+          }]
+        },
+        options:{
+          title:{
+          display: true,
+          text: "失業率",
+          position: "top",
+          fontSize: 50,
+          fontStyle: "normal",
+          fontColor:"	#FFDC35	",
+          fontFamily: "Century Gothic"
+          },
+          legend:{
+            display:true,
+          },
+          responsive: false
+        }
+      });
+      check[1] = -1;
+      document.getElementById("text2").innerHTML="失業率是指失業人口占勞動人口的比率，旨在衡量閒置中的勞動產能。";
+	  document.getElementById("p_2").innerHTML="資料出處：";
+	  document.getElementById("a_2").href="https://www.dgbas.gov.tw/point.asp?index=3";
+	  document.getElementById("a_2").innerHTML=" https://www.dgbas.gov.tw/point.asp?index=3";
+      }
+    
+	
+      if(check[2]==1){
+            var ctx2 = document.getElementById('myChart3').getContext("2d");
+            document.getElementById("div3").style="border:3px dashed #336666";
+            var chart = new Chart(ctx2, 
+  
+            {
+                type: "line",
+                data: {
+                labels: data3.map(x=>x.Time),
+                datasets: [{
+                label: "物價上漲率",
+                data: data3.map(x=>x.Volume),
+    
+                lineTension: 0,
+                backgroundColor: "black",
+                borderColor: "black",
+                fill: false,
+                borderWidth: 2,
+                
+                pointRadius: 5,
+                pointHoverRadius: 7,
+                }]
+            },
+                options:{
+                title:{
+                display: true,
+                text: "物價上漲率",
+                position: "top",
+                fontSize: 50,
+                fontStyle: "normal",
+                fontColor:"	#FFDC35	",
+                fontFamily: "Century Gothic"
+                },
+                legend:{
+                display: true
+                },
+                responsive: false
+            }
+            });    
+            check[2] = -1;
+            document.getElementById("text3").innerHTML="主計處每年都會公布「當年度的CPI」給國人作參考，讓國人知道哪一年的物價和之前比，提高了多少。";
+	    document.getElementById("p_3").innerHTML="資料出處：";
+	    document.getElementById("a_3").href="https://www.stat.gov.tw/lp.asp?ctNode=486&CtUnit=331&BaseDSD=7&mp=4";
+	    document.getElementById("a_3").innerHTML=" https://www.stat.gov.tw/lp.asp?ctNode=486&CtUnit=331&BaseDSD=7&mp=4";
+        }
+        
+      
+	
+            }
+    </script> 
+</body>
+</html>
