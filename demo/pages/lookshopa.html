@@ -12,7 +12,7 @@
     <script src='https://kit.fontawesome.com/a076d05399.js'></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-   
+    <script src="../assets/js/add.js"></script>
 </head>
 <body style="">
 <!--Header開始-->
@@ -162,33 +162,8 @@ function closeDialog(){
         <input type="button" value="+" class="plplus" field="quantity"/>
         </form>
     <div class="stock"><p>庫存：87</p></div>
-<script>
-    $(function() {
-    $(".plplus").click(function(e) {
-    e.preventDefault();
-    fieldName = $(this).attr("field");
-    var currentVal = parseInt($("input[name=" + fieldName + "]").val());
-    if (!isNaN(currentVal)) {
-    $("input[name=" + fieldName + "]").val(currentVal + 1);
-    } else 
-    {
-    $("input[name=" + fieldName + "]").val(0);
-    }
-    });
-    $(".plminus").click(function(e) 
-    {
-    e.preventDefault();
-    fieldName = $(this).attr("field");
-    var currentVal = parseInt($("input[name=" + fieldName + "]").val());
-    if (!isNaN(currentVal) && currentVal > 0) {
-    $("input[name=" + fieldName + "]").val(currentVal - 1);
-    } else 
-    {
-    $("input[name=" + fieldName + "]").val(0);
-    }
-    });
-    });
-</script>
+
+  
 </div>
         <a href="#" class="shippingcar">加入購物車</a>
         <input type="hidden" name="prid" value="">
